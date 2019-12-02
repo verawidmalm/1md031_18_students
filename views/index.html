@@ -1,9 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
     <head>
-        <title>DELI-VERY</title>
+        <title>Korvmojen</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" href="css/deli-very.css">
+
+        <script type="text/javascript" src="js/menu.js"></script>
+        <script src="https://vuejs.org/js/vue.js"defer></script>
+        <script src="js/js_script.js" defer></script>
+        <script src="/vue/vue.js" defer></script>
+        <script src="/socket.io/socket.io.js" defer></script>
+        <script src="js/vue_script.js" defer></script>
     </head>
     <body>
-        <h1>Hello World!!!</h1>
+      <main id = "myID">
+
+      <header id="headern">
+        <h1 id="vtext" >Välkommen till Korvmojen!</h1>
+        <img id ="headerbild" src ="img/faris_katt.jpeg">
+      </header>
+
+
+      <section id= burgerMenu>
+      <p><h2> Välkommen! Välj burgare nedan </h2></p>
+
+      <div id= tabell>
+      <div  id= burgerz v-for= "burger in burgers">
+      <h2>
+      {{burger.name}}
+      </h2>
+      <img v-bind:src="burger.img" height="200 vh" width="200vw" > <br>
+      <p>info</p>
+      <li v-if ="burger.lactose ==true"> Contains lactose</li>
+      <li v-if ="burger.gluten==true"> Contains gluten </li>
+      <li> {{burger.kcal}} calories
+      </li>
+
+      <input type="checkbox"  id="burger.name" v-bind:value="burger.name" v-model="chosenburger"> Add {{burger.name}}
+      </div>
+      </div>
+      </section>
+
+      <section id = "contact">
+        <h2>Kundinformation</h2>
+          <p> Vi behöver lite info om dig... </p>
+          <form>
+            <h2> Delivery Information</h2>
+            <p>
+              <label for = "Full name" >Full name</label> <br>
+              <input type= "text" v-model= "fullName" name="fn" required="required" placeholder="Your full name here">
+            </p>
+            <p>
+              <label for = "email" >Email-address</label> <br>
+              <input type= "text" v-model= "email" name="email" required="required" placeholder="Your e-mail here">
+
+
+
+            <p>
+              <label for="gender"> Gender </label> <br>
+              <input type="radio" name="kn" value="Male" v-model="gender"> Male <br>
+              <input type="radio"  name="kn" value="Female" v-model="gender"> Female <br>
+              <input type="radio"  name="kn" value="Other"  v-model="gender" > Other <br>
+
+          </p>
+
+          <p>
+            <label for = "payment" >Select your payment method </label> <br>
+            <select v-model="selectedpayment">
+              <option disabled value="">Please select one</option>
+              <option>Swish</option>
+              <option>Mobilt Bank-ID </option>
+              <option>Faktura</option>
+            </select>
+          </p>
+        </form>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>DELI-VERY MAP</title>
+        <h1> Click in the map! </h1>
+        <a href="/dispatcher" target="_blank">Open dispatcher in new window</a>.
+        <div class="view-box">
+
+          <div id="dots" v-on:click="displayOrder">
+
+          <div  v-bind:style="{ left: details.x + 'px', top: details.y + 'px'}">    T
+          </div>
+          </div>
+        </div>
+
+
+          <div class="ORDERS">
+
+            <div>
+              <button v-on:click="addOrder" type="submit"> Klart </button>
+            </div>
+            <div class="orderedItems" id="orderMenu" v-bind="orderList">{{orderList}}</div>
+
+            </div>
+    </div>
+
+
+      </section>
+    </main>
+      <footer>
+        <p>Klagomål? Kontakta vera.wid@gmail.com </p>
+      </footer>
     </body>
+
 </html>
